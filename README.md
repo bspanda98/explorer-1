@@ -1,4 +1,4 @@
-# XDCScan Explorer
+# SDXScan Explorer
 
 ## Local installation
 
