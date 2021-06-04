@@ -36,7 +36,7 @@ const ERC20_METHOD_DIC = { '0xa9059cbb': 'transfer', '0xa978501e': 'transferFrom
  * bulkSize: size of array in block to use bulk operation
  */
 // load config.json
-const config = { nodeAddr: 'localhost', wsPort: 8555, bulkSize: 100 };
+const config = { nodeAddr: 'localhost', wsPort: 2546, bulkSize: 100 };
 try {
   var local = require('../config.json');
   _.extend(config, local);
@@ -219,12 +219,12 @@ const writeTransactionsToDB = async (config, blockData, flush) => {
             if (ERC20_METHOD_DIC[methodCode] === 'transfer') {
               // Token transfer transaction
               transfer.from = txData.from;
-              transfer.to = `xdc${txData.input.substring(34, 74)}`;
+              transfer.to = `0x${txData.input.substring(34, 74)}`;
               transfer.value = Number(`0x${txData.input.substring(74)}`);
             } else {
               // transferFrom
-              transfer.from = `xdc${txData.input.substring(34, 74)}`;
-              transfer.to = `xdc${txData.input.substring(74, 114)}`;
+              transfer.from = `0x${txData.input.substring(34, 74)}`;
+              transfer.to = `0x${txData.input.substring(74, 114)}`;
               transfer.value = Number(`0x${txData.input.substring(114)}`);
             }
             transfer.method = ERC20_METHOD_DIC[methodCode];

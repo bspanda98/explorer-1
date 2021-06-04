@@ -129,7 +129,7 @@
                                                 <!--  Type of Token                                                
                                                 <div class="row align-items-center" ng-show="tx.ERC">
                                                     <div class="col-md-3 fw6 mb-1">
-                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in XDC and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>XRC {ERC} </div>
+                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in SDX and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>XRC {ERC} </div>
                                                     <div class="col-md-9">
                                                         <div class="pl-small">
                                                             {{tx.ERC}} </div>
@@ -138,14 +138,14 @@
                                                 <div class="row align-items-center" ng-show="tx.isTransfer">
                                                     <hr class="hr-space">
                                                     <div class="col-md-3 fw6 mb-1">
-                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in XDC and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Token Transfer: </div>
+                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in SDX and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Token Transfer: </div>
                                                         <div class="pl-small">From <a href="/addr/{{tx.from}}">{{tx.from.substr(0,24)}}...</a>  </div>
                                                         <div class="pl-small">To <a href="/addr/{{tx.to}}">{{tx.transerTo.substr(0,24)}}...</a> </div>
                                                         <div class="pl-small">{{tx.tokenNum}} <a href="/token/{{tx.contractAddr}}">{{tx.tokenName}}</a>
                                                     </div>
                                                     <!-- <div class="col-md-9">
                                                         <div class="pl-small">
-                                                            0 XDC </div>
+                                                            0 SDX </div>
                                                     </div> -->
                                                 </div>
                                                 <hr class="hr-space">
@@ -153,7 +153,7 @@
                                                 <div class="row align-items-center" ng-show="tx.tokensTrasferred">
                                                     <hr class="hr-space">
                                                     <div class="col-md-3 fw6 mb-1">
-                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in XDC and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Interacted With (To)</div>
+                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in SDX and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Interacted With (To)</div>
                                                         <div class="col-md-9">
                                                             <div class="pl-small">
                                                                 Contract
@@ -176,7 +176,7 @@
                                                 <div class="row align-items-center" ng-show="tx.tokensTrasferred">
                                                     <hr class="hr-space">
                                                     <div class="col-md-3 fw6 mb-1">
-                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in XDC and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Token Transfer: </div>
+                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in SDX and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Token Transfer: </div>
                                                         <div class="col-md-9">
                                                             <div class="pl-small">From <a href="/addr/{{tx.tokensTrasferred.from}}">{{tx.tokensTrasferred.from.substr(0,24)}}...</a>  </div>
                                                             <div class="pl-small">To <a href="/addr/{{tx.tokensTrasferred.to}}">{{tx.tokensTrasferred.to.substr(0,24)}}...</a> </div>
@@ -187,7 +187,7 @@
                                                 <hr class="hr-space">
                                                 <div class="row align-items-center">
                                                     <div class="col-md-3 fw6 mb-1">
-                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in XDC and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Value </div>
+                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in SDX and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Value </div>
                                                     <div class="col-md-9">
                                                         <div class="pl-small fw6">
                                                             <!-- <img src="/img/mini-logo.svg" alt="mini-logo" class="mini-logo"/>  -->
@@ -203,7 +203,7 @@
                                                 <hr class="hr-space">
                                                 <div class="row align-items-center">
                                                     <div class="col-md-3 fw6 mb-1">
-                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in XDC and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Transaction fee: </div>
+                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="The value being transacted in SDX and fiat value. Note: You can click the fiat value (if available) to see historical value at the time of transaction."></i>Transaction fee: </div>
                                                     <div class="col-md-9">
                                                         <div class="pl-small fw6">
                                                             {{tx.transactionFee | number : 11}} {{ settings.symbol }}<span class="fw4">(
@@ -218,7 +218,7 @@
                                                 <hr class="hr-space">
                                                 <div class="row align-items-center">
                                                     <div class="col-md-3 fw6 mb-1">
-                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="Maximum amount of gas provided for the transaction. For normal XDC transfers, the value is 21,000. For contract this value is higher and bound by block gas limit."></i>Gas Provided </div>
+                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="Maximum amount of gas provided for the transaction. For normal SDX transfers, the value is 21,000. For contract this value is higher and bound by block gas limit."></i>Gas Provided </div>
                                                     <div class="col-md-9">
                                                         <div class="pl-small">
                                                             {{tx.gas}} </div>
@@ -227,7 +227,7 @@
                                                 <hr class="hr-space">
                                                 <div class="row align-items-center">
                                                     <div class="col-md-3 fw6 mb-1">
-                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="Cost per unit of gas specified for the transaction, in XDC and Gwei. The higher the gas price the higher chance of getting included in a block."></i>Gas Price </div>
+                                                        <i class="far fa-question-circle text-light mr-1" data-container="body" data-toggle="tooltip" data-placement="top" title="Cost per unit of gas specified for the transaction, in SDX and Gwei. The higher the gas price the higher chance of getting included in a block."></i>Gas Price </div>
                                                     <div class="col-md-9">
                                                         <div class="pl-small">
                                                                 {{tx.gasPrice}} </div>

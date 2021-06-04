@@ -34,19 +34,19 @@ angular.module('BlocksApp').controller('HomeController', function($rootScope, $s
       $scope.quoteINR = resp.data.quoteINR;
       $scope.quoteEUR = resp.data.quoteEUR;
       $scope.todayDailyRewards = resp.data.todayRewards;
-      $scope.totalXDC = resp.data.totalXDCSupply;
+      $scope.totalSDX = resp.data.totalSDXSupply;
       $scope.totalNodes = resp.data.totalMNCount;
-      $scope.XDCCirculatingSupply = resp.data.XDCCirculatingSupply;
-      $scope.totalXDCinUSD = (resp.data.totalXDCSupply * parseFloat($scope.quoteUSD)).toFixed();
-      $scope.totalXDCinINR = (resp.data.totalXDCSupply * parseFloat($scope.quoteINR)).toFixed();
-      $scope.totalXDCinEUR = (resp.data.totalXDCSupply * parseFloat($scope.quoteEUR)).toFixed();
-      $scope.totalXDCXDCCirculatingSupplyinUSD = (resp.data.XDCCirculatingSupply * parseFloat($scope.quoteUSD)).toFixed();
-      $scope.totalXDCXDCCirculatingSupplyinINR = (resp.data.XDCCirculatingSupply * parseFloat($scope.quoteINR)).toFixed();
-      $scope.totalXDCXDCCirculatingSupplyinEUR = (resp.data.XDCCirculatingSupply * parseFloat($scope.quoteEUR)).toFixed();
+      $scope.SDXCirculatingSupply = resp.data.SDXCirculatingSupply;
+      $scope.totalSDXinUSD = (resp.data.totalSDXSupply * parseFloat($scope.quoteUSD)).toFixed();
+      $scope.totalSDXinINR = (resp.data.totalSDXSupply * parseFloat($scope.quoteINR)).toFixed();
+      $scope.totalSDXinEUR = (resp.data.totalSDXSupply * parseFloat($scope.quoteEUR)).toFixed();
+      $scope.totalSDXSDXCirculatingSupplyinUSD = (resp.data.SDXCirculatingSupply * parseFloat($scope.quoteUSD)).toFixed();
+      $scope.totalSDXSDXCirculatingSupplyinINR = (resp.data.SDXCirculatingSupply * parseFloat($scope.quoteINR)).toFixed();
+      $scope.totalSDXSDXCirculatingSupplyinEUR = (resp.data.SDXCirculatingSupply * parseFloat($scope.quoteEUR)).toFixed();
       $scope.accountsCount = resp.data.accountsCount;
       $scope.transactionCount = resp.data.transactionCount;
-      $scope.totalBurntValue = resp.data.totalXDCBurntValue.toFixed();
-      $scope.totalStakedValue = resp.data.totalXDCStakedValue;
+      $scope.totalBurntValue = resp.data.totalSDXBurntValue.toFixed();
+      $scope.totalStakedValue = resp.data.totalSDXStakedValue;
       $scope.CMCPrice_change24h = (resp.data.percent_change_24h).toFixed(2);
       $scope.activeAddresses = resp.data.activeAddresses;
 
@@ -57,9 +57,9 @@ angular.module('BlocksApp').controller('HomeController', function($rootScope, $s
     // totalNodes();
     // totalStakedValue();
     // totalBurntValue();
-    // totalXDC()
-    // FetchUSDPrice().then(() => totalXDC()).catch(e => {
-    //   console.log("[*] exception at HomeController.FetchUSDPrice / totalXDC: ", e)
+    // totalSDX()
+    // FetchUSDPrice().then(() => totalSDX()).catch(e => {
+    //   console.log("[*] exception at HomeController.FetchUSDPrice / totalSDX: ", e)
     // });
     // getTotalRewards();
   }
@@ -117,15 +117,15 @@ angular.module('BlocksApp').controller('HomeController', function($rootScope, $s
   //   })
     
   // }
-  function totalXDC(){
+  function totalSDX(){
     $http({
       method: 'GET',
-      url: '/totalXDCSupply',
+      url: '/totalSDXSupply',
       data: {}
     }).then(function(resp) {
       // console.log(resp)
-      $scope.totalXDC = resp.data;
-      $scope.totalXDCinUSD = (resp.data * parseFloat($scope.quoteUSD)).toFixed();
+      $scope.totalSDX = resp.data;
+      $scope.totalSDXinUSD = (resp.data * parseFloat($scope.quoteUSD)).toFixed();
     });
   }
   function getTotalRewards(){

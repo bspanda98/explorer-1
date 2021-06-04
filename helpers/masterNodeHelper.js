@@ -1,13 +1,13 @@
 'use strict';
-const masterNodeDetails = require('../models/masterNodeDetails');
-const masterNodeRewardsDetails = require('../models/masterNodeRewardsDetails');
-const contracts = require('../contractTpl/contracts.js');
+// const masterNodeDetails = require('../models/masterNodeDetails');
+// const masterNodeRewardsDetails = require('../models/masterNodeRewardsDetails');
+// const contracts = require('../contractTpl/contracts.js');
 var config = require('../config.json');
 const Xdc3Latest = require("xdc3");
 const xdc3Latest = new Xdc3Latest(new Xdc3Latest.providers.WebsocketProvider(config.wss));
 var xdc3LatestRelay = require('../routes/xdc3LatestRelay');
 const web3relay = require('../routes/web3relay');
-var masterNodeContract;
+// var masterNodeContract;
 var contractAddress = "0x0000000000000000000000000000000000000088";
 const rewardsPerEpoch = 4500;
 const epochInterval = 900;
@@ -108,8 +108,8 @@ module.exports = {
                             candidate = '0x' + candidatesData[j].substring(3, candidatesData[j].length);
                             stakeAmount = await masterNodeContract.methods.getCandidateCap(candidate).call();
                             owner = await masterNodeContract.methods.getCandidateOwner(candidate).call();
-                            candidate = 'xdc' + candidate.substring(2, candidate.length);
-                            owner = 'xdc' + owner.substring(2, owner.length);
+                            candidate = '0x' + candidate.substring(2, candidate.length);
+                            owner = '0x' + owner.substring(2, owner.length);
                             stakeAmount = stakeAmount / (10 ** 18);
                             array = {
                                 epochNumber: i,
@@ -139,7 +139,7 @@ module.exports = {
     getCandidatesByBlock: async function (blockNumber) {
         try {
             const hexBlockNumber = '0x' + blockNumber.toString(16);
-            let url = 'https://rpc.xinfin.network/getBlockSignersByNumber';
+            let url = 'https://rpc.swapdex.net/getBlockSignersByNumber';
             let config = {
                 "url": url,
                 "contentType": "application/json",

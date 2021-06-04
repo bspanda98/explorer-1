@@ -17,8 +17,8 @@ var eth = require("./web3relay").eth;
 var async = require('async');
 const ws = new WebSocket("wss://wsapi.homiex.com/openapi/quote/ws/v1");
 let homieExData;
-let BlockSigners = "0x720d340a19fb4159407fbb590edfa3feeeffba18";
-// let RandomizeSMC = "xdc0000000000000000000000000000000000000090";
+let BlockSigners = "0xbd4cc6f42fca13dcc4d2b6d0bdde1767d82b1edd";
+let RandomizeSMC = "0x0000000000000000000000000000000000000090";
 
 // module.exports = function(app){
 var web3relay = require('./web3relay');
@@ -29,7 +29,7 @@ ws.on('open', function open() {
     ws.send(JSON.stringify({ "ping": Date.now() }));
   }, 120000);
   ws.send(JSON.stringify({
-    "symbol": "XDCEUSDT",
+    "symbol": "SDXEUSDT",
     "topic": "realtimes",
     "event": "sub",
     "params": {
@@ -51,12 +51,12 @@ ws.on('open', function open() {
 var contracts = require('../contractTpl/contracts.js');
 var masterNodeContract;
 var web3relay;
-// var contractAddress = "xdc0000000000000000000000000000000000000088";
+var contractAddress = "0x0000000000000000000000000000000000000088";
 var burntAddress = "0x0000000000000000000000000000000000000000";
 let resignMNCount = 14;
 let epochRewards = 4500;
 let epochInDay = 48;
-let burntBalance, totalMasterNodesVal, totalStakedValueVal, mnDailyRewards, totalXDC, cmc_xdc_price;
+let burntBalance, totalMasterNodesVal, totalStakedValueVal, mnDailyRewards, totalSDX, cmc_sdx_price;
 module.exports = function (app) {
   web3relay = require('./web3relay');
 
@@ -82,10 +82,10 @@ module.exports = function (app) {
   app.post('/block', getBlock);
   app.post('/data1', getData);
   app.get('/publicAPI', publicAPI);//all public APIs
-  app.get('/totalXDC', publicAPI.getTotalXDC);
+  app.get('/totalSDX', publicAPI.getTotalSDX);
   app.get('/getcirculatingsupply', publicAPI.getCirculatingSupply);
 
-  app.get('/totalXDCSupply', getTotalXDCSupply);
+  app.get('/totalSDXSupply', getTotalSDXSupply);
 
   //app.post('/daorelay', DAO);
   app.post('/addressListData', addressListData);
@@ -108,8 +108,8 @@ module.exports = function (app) {
   // app.post('/todayRewards', todayRewards);
   // app.post('/totalStakedValue', totalStakedValue)
   // app.post('/totalBurntValue', totalBurntValue)
-  // app.post('/totalXDCStakedValue', totalXDCStakedValue)
-  // app.post('/totalXDCBurntValue', totalXDCBurntValue)
+  // app.post('/totalSDXStakedValue', totalSDXStakedValue)
+  // app.post('/totalSDXBurntValue', totalSDXBurntValue)
   // app.post('/totalMasterNodes', totalMasterNodes);
   app.post('/CMCPrice', totalMasterNodes);
   app.post('/getXinFinStats', getXinFinStats)
@@ -120,7 +120,7 @@ module.exports = function (app) {
    *totalMasterNodes:totalMasterNodes,
     totalStakedValue:totalStakedValue,
     mnDailyRewards:mnDailyRewards,
-    totalXDC:totalXDC,       
+    totalSDX:totalSDX,       
     monthlyRewards: parseFloat(mnDailyRewards) * 31,
     monthlyRewardPer: ((parseFloat(mnDailyRewards) * 31) / 10000000) * 100,
     yearlyRewardPer: ((parseFloat(mnDailyRewards) * 31 * 12) / 10000000) * 100,
@@ -159,7 +159,8 @@ module.exports = function (app) {
   //     }
 
   totalBlockNum = eth.blockNumber;
-  totalXDC = (37500000000 + 5.55 * totalBlockNum).toFixed();
+  // totalSDX = (37500000000 + 5.55 * totalBlockNum).toFixed();
+  totalSDX = (1000000000).toFixed();
 
   //     alphaExVol = await axios.get("https://api2.alphaex.net/api/xdcVolume");
 
@@ -209,8 +210,8 @@ module.exports = function (app) {
   app.post('/todayRewards', todayRewards);
   app.post('/totalStakedValue', totalStakedValue)
   app.post('/totalBurntValue', totalBurntValue)
-  app.post('/totalXDCStakedValue', totalXDCStakedValue)
-  app.post('/totalXDCBurntValue', totalXDCBurntValue)
+  app.post('/totalSDXStakedValue', totalSDXStakedValue)
+  app.post('/totalSDXBurntValue', totalSDXBurntValue)
   app.post('/totalMasterNodes', totalMasterNodes);
   app.post('/CMCPrice', totalMasterNodes);
   app.post('/getXinFinStats', getXinFinStats);
@@ -469,7 +470,7 @@ function fnum(x) {
 
   return "1T+";
 }
-var getTotalXDCSupply = function (req, res) {
+var getTotalSDXSupply = function (req, res) {
   burntBalance = web3relay.eth.getBalance(burntAddress).toPrecision() / Math.pow(10, 18)
   totalBlockNum = eth.blockNumber;
   respData = ((37500000000 + 5.55 * totalBlockNum) - burntBalance).toFixed();
@@ -487,12 +488,12 @@ var totalBurntValue = async function (req, res) {
   // res.write(fnum(balace));
   res.end();
 }
-var totalXDCStakedValue = async function (req, res) {
+var totalSDXStakedValue = async function (req, res) {
   let balace = await web3relay.eth.getBalance(contractAddress) / Math.pow(10, 18)
   res.write(balace);
   res.end();
 }
-var totalXDCBurntValue = async function (req, res) {
+var totalSDXBurntValue = async function (req, res) {
   let balace = await web3relay.eth.getBalance(burntAddress) / Math.pow(10, 18)
   res.write(balace);
   res.end();
@@ -503,7 +504,7 @@ var oneDaySeconds = 86400;
 var sendBlocks = async function (lim, res) {
   let activeAddresses = 0;
   if (!masterNodeContract) {
-    masterNodeContract = new web3relay.eth.Contract(contracts.masterNodeABI,) // contractAddress);
+    masterNodeContract = new web3relay.eth.Contract(contracts.masterNodeABI); //contractAddress);
   }
 
   var blockHeight = await web3relay.eth.getBlockNumber();
@@ -519,13 +520,15 @@ var sendBlocks = async function (lim, res) {
   let transactionCount = await Transaction.count();
   let accountsCount = await Account.count();
 
- //  let mnCount = await masterNodeContract.methods.getCandidates().call()
+  // let mnCount = await masterNodeContract.methods.getCandidates().call()
   mnCount = mnCount.length - resignMNCount
   let mnDailyRewards = ((epochRewards / 108) * epochInDay).toFixed(0)
-  let totalXDCBurntValue = await web3relay.eth.getBalance(burntAddress) / Math.pow(10, 18)
-  let totalXDCStakedValue = await web3relay.eth.getBalance(contractAddress) / Math.pow(10, 18)
-  let totalXDCSupply = ((37500000000 + 5.55 * blockHeight) - totalXDCBurntValue).toFixed();
-  let XDCCirculatingSupply = (12100000000 + 5.55 * blockHeight).toFixed();
+  let totalSDXBurntValue = await web3relay.eth.getBalance(burntAddress) / Math.pow(10, 18)
+  let totalSDXStakedValue = await web3relay.eth.getBalance(contractAddress) / Math.pow(10, 18)
+  // let totalSDXSupply = ((37500000000 + 5.55 * blockHeight) - totalSDXBurntValue).toFixed();
+  let totalSDXSupply = ((1000000000) - totalSDXBurntValue).toFixed()
+  // let SDXCirculatingSupply = (12100000000 + 5.55 * blockHeight).toFixed();
+  let SDXCirculatingSupply = (327530000).toFixed();
   let getCandidates = await masterNodeContract.methods.getCandidates().call()
   let totalMNCount = getCandidates.length - resignMNCount
 
@@ -559,10 +562,10 @@ var sendBlocks = async function (lim, res) {
       result.transactionCount = transactionCount;
       result.percent_change_24h = latestPrice.percent_change_24h;
       result.todayRewards = mnDailyRewards;
-      result.totalXDCBurntValue = totalXDCBurntValue;
-      result.totalXDCStakedValue = totalXDCStakedValue.toFixed();
-      result.totalXDCSupply = totalXDCSupply;
-      result.XDCCirculatingSupply = XDCCirculatingSupply
+      result.totalSDXBurntValue = totalSDXBurntValue;
+      result.totalSDXStakedValue = totalSDXStakedValue.toFixed();
+      result.totalSDXSupply = totalSDXSupply;
+      result.SDXCirculatingSupply = SDXCirculatingSupply
       result.totalMNCount = totalMNCount;
       result.activeAddresses = activeAddresses;
       result.TPS = totalTXs / costTime;
@@ -591,7 +594,8 @@ const getXinFinStats = async function (lim, res) {
 
   }
   totalBlockNum = await eth.getBlockNumber();
-  totalXDC = 37500000000 + 5.55 * totalBlockNum;
+  // totalSDX = 37500000000 + 5.55 * totalBlockNum;
+  totalSDX = 1000000000;
   volume_24h = latestPrice.volume_24h;
   totalStakedValueVal = await web3relay.eth.getBalance(contractAddress) / Math.pow(10, 18)
   alphaExVol = await axios.get("https://api2.alphaex.net/api/xdcVolume");
@@ -601,15 +605,15 @@ const getXinFinStats = async function (lim, res) {
     totalStakedValueFiat: (parseFloat(totalStakedValueVal) * parseFloat(quoteUSD)).toFixed(),
     burntBalance: (burntBalance).toFixed(),
     mnDailyRewards: mnDailyRewards,
-    totalXDC: totalXDC,
-    totalXDCFiat: (totalXDC * parseFloat(quoteUSD)).toFixed(),
+    totalSDX: totalSDX,
+    totalSDXFiat: (totalSDX * parseFloat(quoteUSD)).toFixed(),
     monthlyRewards: (parseFloat(mnDailyRewards) * 30).toFixed(),
     monthlyRewardsFiat: (parseFloat(mnDailyRewards) * 30 * parseFloat(quoteUSD)).toFixed(),
     monthlyRewardPer: (((parseFloat(mnDailyRewards) * 30) / 10000000) * 100).toFixed(2),
     yearlyRewardPer: (((parseFloat(mnDailyRewards) * 365) / 10000000) * 100).toFixed(2),
     priceUsd: quoteUSD,
     // xdcVol24HR: (parseFloat(cmc_xdc_price["volume_24h"]) + parseFloat(homieExData.data[0].v) * parseFloat(cmc_xdc_price.price) + parseFloat(alphaExVol.data.xdcVolume) * parseFloat(cmc_xdc_price.price)).toFixed()
-    xdcVol24HR: (parseFloat(volume_24h) + parseFloat(alphaExVol.data.xdcVolume) * parseFloat(quoteUSD)).toFixed()
+    sdxVol24HR: (parseFloat(volume_24h) + parseFloat(alphaExVol.data.sdxVolume) * parseFloat(quoteUSD)).toFixed()
   }));
   res.end()
 

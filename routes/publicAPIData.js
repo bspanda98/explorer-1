@@ -3,7 +3,7 @@ var eth = require("./web3relay").eth;
 var filterBlocks = require('./filters').filterBlocks;
 var witnessListData = require('./witnessListData');
 
-var totalXDC = "totalXDC";
+var totalSDX = "totalSDX";
 
 var getcirculatingsupply = "getcirculatingsupply";
 
@@ -67,9 +67,10 @@ module.exports = async function(req, res){
         methodName = req.query.action;
       
       switch(methodName){
-        case totalXDC:
+        case totalSDX:
           onlyValue = requestParam(req, "onlyValue");
-          value = (37500000000+5.55*totalBlockNum).toFixed();
+          // value = (37500000000+5.55*totalBlockNum).toFixed();
+          value = (1000000000).toFixed();
           if(onlyValue){
             res.write(String(value));
             res.end();
@@ -79,7 +80,8 @@ module.exports = async function(req, res){
           break;
           case getcirculatingsupply:
           onlyValue = requestParam(req, "onlyValue");
-          value = (12100000000+5.55*totalBlockNum).toFixed();
+          // value = (12100000000+5.55*totalBlockNum).toFixed();
+          value = (327530000).toFixed();
           if(onlyValue){
             res.write(String(value));
             res.end();
@@ -450,16 +452,18 @@ function responseFail(res, respData, msg){
   res.end();
 }
 
-module.exports.getTotalXDC = async function(req, res){
+module.exports.getTotalSDX = async function(req, res){
   totalBlockNum = await eth.getBlockNumber();
-  respData = (37500000000+5.55*totalBlockNum).toFixed(8);
+  // respData = (37500000000+5.55*totalBlockNum).toFixed(8);
+  respData = (1000000000).toFixed(8);
   res.write(String(respData));
   res.end();
 }
 
 module.exports.getCirculatingSupply= async function(req, res){
   totalBlockNum = await eth.getBlockNumber();
-  respData = (12100000000+5.55*totalBlockNum).toFixed(8);
+  // respData = (12100000000+5.55*totalBlockNum).toFixed(8);
+  respData = (327530000).toFixed(8);
   res.write(String(respData));
   res.end();
 }

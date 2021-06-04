@@ -270,8 +270,8 @@ var upsertAddress=function(miner, addrs){
 /**
     Break transactions out of blocks and write to DB
 **/
-var BlockSigners = "xdc0000000000000000000000000000000000000089";
-var RandomizeSMC = "xdc0000000000000000000000000000000000000090";
+var BlockSigners = "0xbd4cc6f42fca13dcc4d2b6d0bdde1767d82b1edd";
+// var RandomizeSMC = "xdc0000000000000000000000000000000000000090";
 var pingTXValue = "0";
 var writeTransactionsToDB = function(blockData) {
     var bulkOps = [];

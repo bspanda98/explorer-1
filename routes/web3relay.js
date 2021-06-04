@@ -76,7 +76,7 @@ if (typeof web3 !== "undefined") {
   web3 = new Web3(new Web3.providers.WebsocketProvider(config.WSURL));
 }
 
-web3Addr = new Web3(new Web3.providers.HttpProvider('https://rpc.xinfin.network'));
+web3Addr = new Web3(new Web3.providers.HttpProvider('https://rpc.swapdex.net'));
 
 if (web3.eth.net.isListening())
   console.log("Web3 connection established");
@@ -477,7 +477,7 @@ exports.data = async (req, res) => {
     var addr = req.body.addr.toLowerCase();
     var options = req.body.options;
     let hackedTag ="";
-    if(addr==="xdc6d6f33467529ac73804aad77ef8d8cfe16520ba3"){
+    if(addr==="0x6d6f33467529ac73804aad77ef8d8cfe16520ba3"){
       hackedTag="Hacker's Account"
     }
     var addrData = {};

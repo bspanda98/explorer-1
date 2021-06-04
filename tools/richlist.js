@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 
 var Account = require('../db.js').Account;
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/blockDB');
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/explorerDB');
 
 const makeParityRichList = async () => {
   data = {}
@@ -33,7 +33,7 @@ const makeParityRichList = async () => {
 /**
  * Start config for node connection and sync
  */
-var config = { nodeAddr: 'localhost', 'gethPort': 8545 };
+var config = { nodeAddr: 'localhost', 'gethPort': 8501 };
 // load the config.json file
 try {
   var loaded = require('../config.json');

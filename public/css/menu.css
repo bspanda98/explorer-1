@@ -223,7 +223,7 @@ small[text-size-1] {
 }
 
 .navbar-brand {
-	width: 55px;
+	/*width: 55px;*/
 	display: inline-block;
 	padding-top: .34766rem;
 	padding-bottom: .34766rem;

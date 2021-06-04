@@ -25,16 +25,16 @@ const getQuote = async () => {
         quoteObject = {
             symbol: config.settings.symbol,
             timestamp: Math.round(new Date(quoteUSD.status.timestamp).getTime() / 1000),
-            quoteBTC: quoteBTC.data.SDX.quote.BTC.price,
-            quoteEUR: quoteEUR.data.SDX.quote.EUR.price,
-            quoteINR: quoteINR.data.SDX.quote.INR.price,
-            quoteUSD: quoteUSD.data.SDX.quote.USD.price,
-            volume_24h:quoteUSD.data.SDX.quote.USD.volume_24h,
-            percent_change_24h: quoteUSD.data.XDC.quote.USD.percent_change_24h,
+           quoteBTC: quoteBTC.data.SDX.quote.BTC.price,
+           quoteEUR: quoteEUR.data.SDX.quote.EUR.price,
+           quoteINR: quoteINR.data.SDX.quote.INR.price,
+           quoteUSD: quoteUSD.data.SDX.quote.USD.price,
+           volume_24h:quoteUSD.data.SDX.quote.USD.volume_24h,
+           percent_change_24h: quoteUSD.data.SDX.quote.USD.percent_change_24h,
         }
         // console.log(URL)
         new Market(quoteObject).save( ( err, market, count ) => {
-            // console.log(quoteUSD.data.XDCE.quote.USD.percent_change_24h)
+            // console.log(quoteUSD.data.SDXE.quote.USD.percent_change_24h)
             if ( typeof err !== 'undefined' && err ) {
                process.exit(9);
             } else {
@@ -47,7 +47,7 @@ const getQuote = async () => {
 }
 
 
-var config = { nodeAddr: 'localhost', gethPort: 8545, bulkSize: 100 };
+var config = { nodeAddr: 'localhost', gethPort: 8501, bulkSize: 100 };
 try {
     var local = require('../config.json');
     _.extend(config, local);

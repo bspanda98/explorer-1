@@ -68,7 +68,7 @@ BlocksApp.controller('HeaderController', ['$scope', '$location', function($scope
             if(search.length==16)//master node address
             $location.path("/masternode/" + search);
         else if(search.length==18){//master node address
-            if(search.indexOf("xdc")==0){
+            if(search.indexOf("0x")==0){
                 $location.path("/masternode/" + search.substr(3));
             }
         }

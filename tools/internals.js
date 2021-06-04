@@ -25,9 +25,9 @@ function grabInternalTxs(batchNum, batchSize) {
     "id":' + batchNum + '}';
 
   var post_options = {
-      // host: 'rpc.xinfin.network',
+      // host: 'rpc.swapdex.net',
       host: 'localhost',
-      port: '9646',
+      port: '8501',
       path: '/',
       method: 'POST',
       headers: { "Content-Type": "application/json" }
